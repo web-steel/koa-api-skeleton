@@ -1,0 +1,2 @@
+// endpoint
+import './app/server';
