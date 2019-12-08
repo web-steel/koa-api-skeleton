@@ -1,6 +1,7 @@
 import * as Koa from 'koa';
 import config from '../../config';
 import * as winston from 'winston';
+import { getLogLevelForStatus } from '../../lib/logger';
 
 export default function () {
     return async (ctx: Koa.Context, next: () => Promise<any>) => {
@@ -10,18 +11,6 @@ export default function () {
         await next();
 
         const ms = new Date().getMilliseconds() - start;
-
-        let logLevel: string;
-        if (ctx.status >= 500) {
-            logLevel = 'error';
-        }
-        else if (ctx.status >= 400) {
-            logLevel = 'warn';
-        }
-        else if (ctx.status >= 100) {
-            logLevel = 'info';
-        }
-
         const msg: string = `${ctx.method} ${ctx.originalUrl} ${ctx.status} ${ms}ms`;
 
         winston.configure({
@@ -38,7 +27,7 @@ export default function () {
             ]
         });
 
-        if (config.node_env !== 'production')
-            winston.log(logLevel, msg);
+        if (config.nodeEnv !== 'production')
+            winston.log(getLogLevelForStatus(ctx.status, 'winston'), msg);
     };
 }

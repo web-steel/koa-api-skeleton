@@ -40,8 +40,11 @@ export interface IConfig {
             dns: string
         }
     };
-    node_env: string;
-    is_test: boolean;
+    nodeEnv: string;
+    isTest: boolean;
+    isProduction: boolean;
+    isDevelopment: boolean;
+
 }
 
 const config: IConfig = {
@@ -72,8 +75,10 @@ const config: IConfig = {
             dns: process.env.SENTRY_DNS
         }
     },
-    node_env: process.env.NODE_ENV,
-    is_test: !!(process.env.NODE_ENV === 'test' && process.env.NODE_TEST)
+    nodeEnv: process.env.NODE_ENV,
+    isTest: !!(process.env.NODE_ENV === 'test' && process.env.NODE_TEST),
+    isDevelopment: process.env.NODE_ENV === 'development',
+    isProduction: process.env.NODE_ENV === 'production'
 };
 
 /**

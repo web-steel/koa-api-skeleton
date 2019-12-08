@@ -1,4 +1,4 @@
-import { BadRequest, UnprocessableEntity } from '../constant/error';
+import { BadRequest, UnprocessableEntity } from '../../constant/errors';
 import { Context } from 'koa';
 
 function validation() {

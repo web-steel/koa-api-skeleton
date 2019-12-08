@@ -1,5 +1,5 @@
 import { v4 } from 'uuid';
-import { BaseContext } from 'koa';
+import { DefaultContext } from 'koa';
 
 interface IRequest {
     header: string;
@@ -24,7 +24,7 @@ export default function requestId(options: IRequest= { header: 'X-Request-Id', p
         generator,
     } = options;
 
-    return (ctx: BaseContext, next: () => Promise<any>) => {
+    return (ctx: DefaultContext, next: () => Promise<any>) => {
         const reqId = ctx.request.get(header) || generator();
         ctx[propertyName] = reqId;
         ctx.set(header, reqId);

@@ -1,4 +1,4 @@
-import * as request from 'supertest';
+import request from 'supertest';
 import app from '../../app/app';
 
 describe('basic route tests', () => {

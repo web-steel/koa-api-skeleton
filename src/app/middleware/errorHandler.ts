@@ -1,20 +1,20 @@
-import { BaseError, NotFound } from '../constant/error';
-import { BaseContext } from 'koa';
-import HTTP_CODE from '../constant/statusCodes';
+import { BaseError, NotFound } from '../../constant/errors';
+import { DefaultContext } from 'koa';
+import { constants } from 'http2';
 
 /**
  * Error handling
  * @returns {Function} Koa middleware.
  */
 function errorHandler() {
-    return async (ctx: BaseContext, next: () => Promise<any>) => {
+    return async (ctx: DefaultContext, next: () => Promise<any>) => {
         try {
             await next();
 
             if (!ctx.body
                 && (!ctx.status
-                    || ctx.status === HTTP_CODE.NOT_FOUND
-                    || ctx.status === HTTP_CODE.METHOD_NOT_ALLOWED))
+                    || ctx.status === constants.HTTP_STATUS_NOT_FOUND
+                    || ctx.status === constants.HTTP_STATUS_METHOD_NOT_ALLOWED))
                 throw new NotFound();
         } catch (err) {
             if (err instanceof BaseError) {
@@ -25,7 +25,7 @@ function errorHandler() {
                 });
             } else {
                 ctx.error({
-                    status: 500,
+                    status: constants.HTTP_STATUS_INTERNAL_SERVER_ERROR,
                     code: 'UNKNOWN_ERROR',
                     message: 'The server encountered an unknown error.',
                 });

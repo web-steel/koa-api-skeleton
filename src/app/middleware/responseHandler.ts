@@ -1,17 +1,15 @@
-import HTTP_CODE from '../constant/statusCodes';
-import { BaseContext } from 'koa';
+import { DefaultContext } from 'koa';
+import { constants } from 'http2';
 
 function responseHandler() {
-    return async (ctx: BaseContext, next: () => Promise<any>) => {
-        ctx.statusCodes = HTTP_CODE;
-
+    return async (ctx: DefaultContext, next: () => Promise<any>) => {
         ctx.success = ({ statusCode, data = undefined }: any) => {
             const status = 'success';
 
-            if (!!statusCode && (statusCode < 400))
+            if (!!statusCode && (statusCode < constants.HTTP_STATUS_BAD_REQUEST))
                 ctx.status = statusCode;
-            else if (!(ctx.status < 400))
-                ctx.status = HTTP_CODE.OK;
+            else if (!(ctx.status < constants.HTTP_STATUS_BAD_REQUEST))
+                ctx.status = constants.HTTP_STATUS_OK;
 
             ctx.body = { status, data };
         };
@@ -19,38 +17,38 @@ function responseHandler() {
         ctx.error = ({ statusCode, code, message = undefined }: any) => {
             const status = 'error';
 
-            if (!!statusCode && (statusCode >= 400 && statusCode < 600))
+            if (!!statusCode && (statusCode >= constants.HTTP_STATUS_BAD_REQUEST && statusCode < 600))
                 ctx.status = statusCode;
-            else if (!(ctx.status >= 500 && ctx.status < 600))
-                ctx.status = HTTP_CODE.INTERNAL_SERVER_ERROR;
+            else if (!(ctx.status >= constants.HTTP_STATUS_INTERNAL_SERVER_ERROR && ctx.status < 600))
+                ctx.status = constants.HTTP_STATUS_INTERNAL_SERVER_ERROR;
 
             ctx.body = { status, code, message };
         };
 
-        ctx.ok = (params = {}) => {
+        ctx.ok = (params: any = {}) => {
             ctx.success({
                 ...params,
-                statusCode: HTTP_CODE.OK,
+                statusCode: constants.HTTP_STATUS_OK,
             });
         };
 
-        ctx.created = (params = {}) => {
+        ctx.created = (params: any = {}) => {
             ctx.success({
                 ...params,
-                statusCode: HTTP_CODE.CREATED,
+                statusCode: constants.HTTP_STATUS_CREATED,
             });
         };
 
-        ctx.accepted = (params = {}) => {
+        ctx.accepted = (params: any = {}) => {
             ctx.success({
                 ...params,
-                statusCode: HTTP_CODE.ACCEPTED,
+                statusCode: constants.HTTP_STATUS_ACCEPTED,
             });
         };
 
         ctx.noContent = () => {
             ctx.success({
-                statusCode: HTTP_CODE.NO_CONTENT,
+                statusCode: constants.HTTP_STATUS_NO_CONTENT,
             });
         };
 
