@@ -26,6 +26,10 @@ To build and run this app locally you will need:
  * koa-router
  * koa-bodyparser
  * koa-response-time
+ * koa-compress
+ * koa-static
+ * swagger-ui-koa
+ * swagger-jsdoc
  * Helmet (security headers)
  * CORS
  * Winston Logger
