@@ -6,7 +6,8 @@ AVAILABLE ENDPOINTS
 
 | method             | resource         | description                                                                                    |
 |:-------------------|:-----------------|:-----------------------------------------------------------------------------------------------|
-| `GET`              | `/`              | Simple welcome response                                                                    |
+| `GET`              | `/`              | Simple welcome response                                                                        |
+| `GET`              | `/swagger`       | Swagger documentation                                                                                               |    
 
 ## Pre-reqs
 To build and run this app locally you will need:
