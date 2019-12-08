@@ -23,8 +23,6 @@
   "license": "ISC",
   "dependencies": {
     "@koa/cors": "^2.2.3",
-    "@types/koa-compress": "^2.0.9",
-    "@types/swagger-jsdoc": "^3.0.2",
     "class-validator": "^0.9.1",
     "delay": "^4.3.0",
     "dotenv": "^6.2.0",
@@ -48,6 +46,8 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "@types/koa-compress": "^2.0.9",
+    "@types/swagger-jsdoc": "^3.0.2",
     "@types/dotenv": "^6.1.1",
     "@types/jest": "^24.0.23",
     "@types/koa": "^2.11.0",
