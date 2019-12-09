@@ -17,7 +17,7 @@ interface IRequest {
  * @param {function} [options.generator] - Id generator function.
  * @return {function} Koa middleware.
  */
-export default function requestId(options: IRequest= { header: 'X-Request-Id', propertyName: 'reqId', generator: v4}) {
+export default (options: IRequest= { header: 'X-Request-Id', propertyName: 'reqId', generator: v4}) => {
     const {
         header,
         propertyName,
@@ -30,4 +30,4 @@ export default function requestId(options: IRequest= { header: 'X-Request-Id', p
         ctx.set(header, reqId);
         return next();
     };
-}
+};

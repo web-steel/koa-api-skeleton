@@ -1,45 +1,43 @@
 import { BadRequest, UnprocessableEntity } from '../../constant/errors';
 import { Context } from 'koa';
 
-function validation() {
-    return async (ctx: Context, next: () => Promise<any>) => {
-        const valid = ctx.validate;
+export default () => async (ctx: Context, next: () => Promise<any>) => {
+    const valid = ctx.validate;
 
-        ctx.validate = async function (inputs: any, rules: any, message: string) {
-            const props: any = {};
-            for (const prop in rules) {
-                if (rules.hasOwnProperty(prop)) {
-                    if (Array.isArray(rules[prop])) {
-                        props[prop] = rules[prop].join('|');
-                    } else
-                        props[prop] = rules[prop];
-                }
+    ctx.validate = async function (inputs: any, rules: any, message: string) {
+        const props: any = {};
+        for (const prop in rules) {
+            if (rules.hasOwnProperty(prop)) {
+                if (Array.isArray(rules[prop])) {
+                    props[prop] = rules[prop].join('|');
+                } else
+                    props[prop] = rules[prop];
             }
-            const v = await valid(inputs, props, message);
-            const isValid = await v.check();
+        }
+        const v = await valid(inputs, props, message);
+        const isValid = await v.check();
 
-            if (!isValid) {
+        if (!isValid) {
 
-                const error = getError(v.errors);
+            const error = getError(v.errors);
 
-                throw (isRequired(v.errors) ?
-                    new BadRequest(error) :
-                    new UnprocessableEntity(error));
-            }
+            throw (isRequired(v.errors) ?
+                new BadRequest(error) :
+                new UnprocessableEntity(error));
+        }
 
-            return true;
-        };
-
-        return await next();
+        return true;
     };
-}
+
+    return await next();
+};
 
 /**
  *
  * @param {array} errors
  * @returns {*}
  */
-function isRequired(errors: any): boolean|any {
+function isRequired(errors: any): boolean | any {
     for (const prop in errors) {
         if (errors.hasOwnProperty(prop))
             if (errors[prop]['rule'] === 'required')
@@ -55,7 +53,7 @@ function isRequired(errors: any): boolean|any {
  * @returns {*}
  */
 function getError(errors: any) {
-    const error: boolean|any = isRequired(errors);
+    const error: boolean | any = isRequired(errors);
 
     if (!error) {
         for (const prop in errors) {
@@ -66,5 +64,3 @@ function getError(errors: any) {
 
     return error;
 }
-
-export default validation;

@@ -1,4 +1,4 @@
-import { BaseContext } from 'koa';
+import { DefaultContext } from 'koa';
 
 export default class GeneralController {
 
@@ -19,7 +19,7 @@ export default class GeneralController {
      *                      example:
      *                          Welcome a API Core
      */
-    public static async index(ctx: BaseContext) {
+    public static async index(ctx: DefaultContext) {
         ctx.body = 'Welcome a API Core';
     }
 }

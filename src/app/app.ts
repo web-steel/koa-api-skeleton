@@ -1,5 +1,3 @@
-import { getLogLevelForStatus } from '../lib/logger';
-
 const responseTime = require('koa-response-time');
 const validator = require('node-input-validator');
 const swaggerUi = require('swagger-ui-koa');
@@ -9,18 +7,19 @@ import responseHandler from './middleware/responseHandler';
 import errorHandler from './middleware/errorHandler';
 import requestId from './middleware/requestId';
 import logging from './middleware/logging';
-import compress from 'koa-compress';
+import options from './middleware/options';
 
-import sentry from '../component/sentry';
 import config from '../config';
+import { router } from './router';
+import sentry from '../component/sentry';
+import { getLogLevelForStatus } from '../lib/logger';
+
+import compress from 'koa-compress';
 import bodyParser from 'koa-bodyparser';
 import helmet from 'koa-helmet';
-
 import cors from '@koa/cors';
 
 import Koa from 'koa';
-
-import { router } from './router';
 
 const app: Koa = new Koa();
 
@@ -32,8 +31,6 @@ app.on('error', (err: Error, ctx: Koa.DefaultContext): void => {
 // Validation middleware -> adds ctx.validate
 app.use(validator.koa());
 app.use(overrideValidator());
-
-app.use(responseHandler());
 
 // Provides important security headers to make your app more secure
 app.use(helmet());
@@ -53,11 +50,14 @@ app.use(responseTime());
 // Console debug logging
 app.use(logging());
 
-// Error handler
+// handler
+app.use(responseHandler());
 app.use(errorHandler());
-app.use(compress());
 
 app.use(swaggerUi.serve);
+
+app.use(compress());
+app.use(options());
 
 // routers
 app.use(router.routes()).use(router.allowedMethods());
