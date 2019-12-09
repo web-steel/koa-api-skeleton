@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.bdtech.by:trackbot/core-api.git"
+    "url": "git@github.com:web-steel/koa2-typescript-api-skeleton.git"
   },
   "author": "",
   "license": "ISC",
