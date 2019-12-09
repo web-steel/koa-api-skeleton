@@ -1,5 +1,5 @@
 {
-  "name": "skeleton",
+  "name": "koa2-app-skeleton",
   "version": "1.3.0",
   "description": "REST API skeleton using NodeJS and Koa2, Typescript. TypeORM with class-validator, SQL CRUD. Docker.",
   "main": "dist/index.js",
@@ -21,6 +21,9 @@
   },
   "author": "",
   "license": "ISC",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "dependencies": {
     "@koa/cors": "^2.2.3",
     "class-validator": "^0.9.1",
