@@ -1,6 +1,6 @@
 {
   "name": "koa2-app-skeleton",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "REST API skeleton using NodeJS and Koa2, Typescript. TypeORM with class-validator, SQL CRUD. Docker.",
   "main": "dist/index.js",
   "readmeFilename": "README.md",
