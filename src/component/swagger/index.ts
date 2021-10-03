@@ -3,7 +3,7 @@ const pkginfo = require('../../../package.json');
 
 import swaggerJSDoc from 'swagger-jsdoc';
 
-const info: any = {
+const info = {
   title: pkginfo.name,
   description: pkginfo.description,
   version: pkginfo.version,
@@ -13,14 +13,14 @@ const info: any = {
 const servers: Array<string> = [];
 
 // Swagger definitions
-const definition: any = {
+const definition = {
   openapi: '3.0.0',
   info,
   servers
 };
 
 // Options for the swagger specification
-const options: any = {
+const options = {
   definition,
   // Path to the API specs
   apis: [

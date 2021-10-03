@@ -23,7 +23,6 @@ export interface IConfig {
         host: string,
         port: number|boolean,
         name: string,
-        dbsslconn: boolean
     };
     cors: {
         origin: string,
@@ -53,12 +52,11 @@ const config: IConfig = {
         root: ROOT
     },
     db: {
-        user: _.defaultTo(process.env.DB_USER, 'postgres'),
-        pass: _.defaultTo(process.env.DB_PASS, 'postgres'),
+        user: _.defaultTo(process.env.DB_USER, 'root'),
+        pass: _.defaultTo(process.env.DB_PASS, 'root'),
         host: _.defaultTo(process.env.DB_HOST, 'localhost'),
-        port: normalizePort(_.defaultTo(process.env.DB_PORT, 5432)),
-        name: _.defaultTo(process.env.DB_NAME, 'postgres'),
-        dbsslconn: process.env.NODE_ENV === 'production',
+        port: normalizePort(_.defaultTo(process.env.DB_PORT, 3306)),
+        name: _.defaultTo(process.env.DB_NAME, 'default'),
     },
     cors: {
         origin: '*',

@@ -5,7 +5,7 @@ import config from '../config';
 const parentDir = join(__dirname, '..');
 
 const connectionOpts: ConnectionOptions = {
-    type: 'postgres',
+    type: 'mysql',
     host: config.db.host,
     port: config.db.port as number,
     username: config.db.user,
@@ -21,16 +21,13 @@ const connectionOpts: ConnectionOptions = {
     },
     synchronize: false,
     logging: !config.isProduction,
-    extra: {
-        ssl: config.db.dbsslconn, // if not development, will use SSL
-    }
 };
 
 interface IDatabase {
     connect(): Promise<Connection>;
     disconnect(): Promise<void>;
     executeSQL(sql: string, ...params: any[]): Promise<any>;
-    reset(): any;
+    reset(): void;
 }
 
 export class Database implements IDatabase {
