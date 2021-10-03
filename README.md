@@ -1,4 +1,4 @@
-# Koa2-TypeScript-API-Skeleton
+# Koa2.TypeScript.Skeleton
 
 The main purpose of this repository is to build a good project setup and workflow for writing a node REST API in TypeScript using Koa2 and TypeORM.
 
