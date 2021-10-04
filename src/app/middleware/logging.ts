@@ -1,4 +1,4 @@
-import config from '../../config';
+import envConfig from '../../config/env';
 import * as winston from 'winston';
 import { getLogLevelForStatus } from '../../lib/logger';
 import { DefaultContext } from 'koa';
@@ -26,6 +26,6 @@ export default () => async (ctx: DefaultContext, next: () => Promise<any>) => {
         ]
     });
 
-    if (config.nodeEnv !== 'production')
+    if (envConfig.nodeEnv !== 'production')
         winston.log(getLogLevelForStatus(ctx.status, 'winston'), msg);
 };

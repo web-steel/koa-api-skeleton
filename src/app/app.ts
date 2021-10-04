@@ -9,11 +9,6 @@ import requestId from './middleware/requestId';
 import logging from './middleware/logging';
 import options from './middleware/options';
 
-import config from '../config';
-import { router } from './router';
-import sentry from '../component/sentry';
-import { getLogLevelForStatus } from '../lib/logger';
-
 import compress from 'koa-compress';
 import bodyParser from 'koa-bodyparser';
 import helmet from 'koa-helmet';
@@ -23,23 +18,35 @@ import Koa from 'koa';
 
 const app: Koa = new Koa();
 
-// centralized error handling
-app.on('error', (err: Error, ctx: Koa.DefaultContext): void => {
-    sentry.captureException(err, {req: ctx.request, extra: ctx, level: getLogLevelForStatus(ctx.status)});
-});
-
 // Validation middleware -> adds ctx.validate
 app.use(validator.koa());
 app.use(overrideValidator());
 
 // Provides important security headers to make your app more secure
-app.use(helmet());
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: [`'self'`],
+            styleSrc: [`'self'`, `'unsafe-inline'`],
+            imgSrc: [`'self'`, 'data:', 'validator.swagger.io'],
+            scriptSrc: [`'self'`, `https: 'unsafe-inline'`],
+        },
+    },
+}));
 
 // Enable cors with default options
-app.use(cors(config.cors));
+app.use(cors({
+    origin: '*',
+    allowMethods: ['GET', 'HEAD', 'PUT', 'POST', 'DELETE', 'PATCH'],
+    exposeHeaders: ['X-Request-Id'],
+}));
 
 // Enable bodyParser with default options
-app.use(bodyParser(config.bodyParser));
+app.use(bodyParser({
+    enableTypes: ['json', 'form'],
+    formLimit: '10mb',
+    jsonLimit: '10mb',
+}));
 
 // Adds an X-Request-Id response header with a unique request ID value
 app.use(requestId());
@@ -58,8 +65,5 @@ app.use(swaggerUi.serve);
 
 app.use(compress());
 app.use(options());
-
-// routers
-app.use(router.routes()).use(router.allowedMethods());
 
 export default app;

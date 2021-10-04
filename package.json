@@ -1,6 +1,6 @@
 {
-  "name": "koa2-app-skeleton",
-  "version": "1.4.0",
+  "name": "koa-api-skeleton",
+  "version": "2.0.0",
   "description": "REST API skeleton using NodeJS and Koa2, Typescript. TypeORM with class-validator, SQL CRUD. Docker.",
   "main": "dist/index.js",
   "readmeFilename": "README.md",
@@ -17,29 +17,34 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:web-steel/koa2-typescript-api-skeleton.git"
+    "url": "git@github.com:web-steel/koa.api.skeleton.git"
   },
-  "author": "",
-  "license": "ISC",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+  "homepage": "https://github.com/web-steel/koa.api.skeleton",
+  "author": {
+    "name": "Vladimir Markov",
+    "email": "web.steel89@gmail.com"
   },
+  "contributors": [
+    {
+      "name": "Vladimir Markov",
+      "email": "web.steel89@gmail.com"
+    }
+  ],
+  "license": "MIT",
   "dependencies": {
     "@koa/cors": "^3.1.0",
+    "@koa/router": "^10.1.1",
+    "@sentry/node": "^6.13.2",
     "class-validator": "^0.13.1",
-    "delay": "^5.0.0",
     "dotenv": "^10.0.0",
     "koa": "^2.13.3",
     "koa-bodyparser": "^4.3.0",
     "koa-compress": "^5.1.0",
     "koa-helmet": "^6.1.0",
     "koa-response-time": "^2.1.0",
-    "koa-router": "^10.1.1",
     "koa-static": "^5.0.0",
-    "lodash": "^4.17.21",
     "mysql": "^2.18.1",
     "node-input-validator": "^4.4.1",
-    "raven": "^2.6.4",
     "reflect-metadata": "^0.1.13",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-koa": "^0.0.1",
@@ -51,11 +56,11 @@
     "@types/jest": "^27.0.2",
     "@types/koa": "^2.13.4",
     "@types/koa__cors": "^3.0.3",
+    "@types/koa__router": "^8.0.8",
     "@types/koa-bodyparser": "^4.3.3",
     "@types/koa-compress": "^4.0.3",
     "@types/koa-helmet": "^6.0.4",
     "@types/koa-response-time": "^2.1.1",
-    "@types/koa-router": "^7.4.4",
     "@types/lodash": "^4.14.175",
     "@types/node": "^16.10.2",
     "@types/raven": "^2.5.4",

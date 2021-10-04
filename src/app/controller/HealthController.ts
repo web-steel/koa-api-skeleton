@@ -1,25 +1,25 @@
 import { DefaultContext } from 'koa';
 
-export default class GeneralController {
+export default class HealthController {
 
     /**
      * @swagger
-     * /:
+     * /health:
      *  get:
      *      tags:
-     *          - Home
-     *      summary: The welcome string is returned.
+     *          - Health
+     *      summary: The health string is returned.
      *      responses:
      *          200:
-     *              description: welcome message
+     *              description: health message
      *              content:
      *                  application/plain:
      *                      schema:
      *                          type: string
      *                      example:
-     *                          Welcome a API Core
+     *                          ok
      */
-    public static async index(ctx: DefaultContext) {
-        ctx.body = 'Welcome a API Core';
+    public static async ok(ctx: DefaultContext) {
+        ctx.body = 'ok';
     }
 }

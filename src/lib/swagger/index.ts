@@ -4,7 +4,7 @@ const pkginfo = require('../../../package.json');
 import swaggerJSDoc from 'swagger-jsdoc';
 
 const info = {
-  title: pkginfo.name,
+  title: 'Koa API Skeleton',
   description: pkginfo.description,
   version: pkginfo.version,
   contact: pkginfo.author,

@@ -1,17 +1,16 @@
 import app from '../../app/app';
-import config from '../../config';
-import delay from 'delay';
+import serverConfig from '../../config/server';
+import startServer from '../../bootstrap/start-server'
 
 const mockListen = jest.fn();
 app.listen = mockListen;
 
-afterEach(() => {
+afterEach( async () => {
     mockListen.mockReset();
 });
 
 it('Server works', async () => {
-    require('../../index');
-    await delay(500);
+    await startServer(app)
     expect(mockListen.mock.calls.length).toBe(1);
-    expect(mockListen.mock.calls[0][0]).toBe(config.server.port);
+    expect(mockListen.mock.calls[0][0]).toBe(serverConfig.port);
 });
