@@ -39,7 +39,7 @@ To build and run this app locally you will need:
 # Getting Started
 - Clone the repository
 ```
-git clone https://github.com/web-steel/koa2-typescript-api-skeleton.git {project_name}
+git clone https://github.com/web-steel/koa2.api.skeleton.git {project_name}
 ```
 
 - Install dependencies
@@ -69,7 +69,7 @@ npm run coverage
 ```
 
 ## Setting up the Database - ORM
-This API is prepared to work with an SQL database, using [TypeORM](https://github.com/typeorm/typeorm). In this case we are using postgreSQL, and that is why in the package.json 'pg' has been included. If you where to use a different SQL database remember to install the correspondent driver.
+This API is prepared to work with an SQL database, using [TypeORM](https://github.com/typeorm/typeorm). In this case we are using mysql, and that is why in the package.json 'mysql' has been included. If you where to use a different SQL database remember to install the correspondent driver.
 
 In local is being mocked with the docker local postgres as can be seen in ".env.sample"
 
@@ -87,27 +87,16 @@ It is importante to notice that, when serving the project directly with *.ts fil
    ]
 ```
 
-Notice that if NODE_ENV is set to development, the ORM config won't be using SSL to connect to the DB. Otherwise it will.
-
-```
-createConnection({
-    ...
-    extra: {
-        ssl: config.DbSslConn, // if not development, will use SSL
-    }
- })
-```
-
 ## Environment variables
 Create a .env file (or just rename the .env.sample) containing all the env variables you want to set, dotenv library will take care of setting them. This project is using three variables at the moment:
 
  * PORT -> port where the server will be started on. Default: **`3000`**.
  * NODE_ENV -> environment, development value will set the logger as debug level. Possible options: development, test, production. Default: **development**.
- * DB_USER -> Database user. Default: **`postgres`**.
- * DB_PASS -> Database password. Default: **`postgres`**.
- * DB_HOST -> Database host. Default: **`localhost`**.
- * DB_PORT -> Database port. Default: **`5432`**.
- * DB_NAME -> Database name. Default: **`postgres`**.
+ * DATABASE_USER -> Database user. Default: **`mysql`**.
+ * DATABASE_PASS -> Database password. Default: **`mysql`**.
+ * DATABASE_HOST -> Database host. Default: **`localhost`**.
+ * DATABASE_PORT -> Database port. Default: **`3306`**.
+ * DATABASE_NAME -> Database name. Default: **`default`**.
  
 ## Project Structure
 The most obvious difference in a TypeScript + Node project is the folder structure.
@@ -126,7 +115,7 @@ The full folder structure of this app is explained below:
 | index.ts                 | Entry point to your KOA app                                                                   |
 | package.json             | File that contains npm dependencies as well as build scripts                                  |
 | tsconfig.json            | Config settings for compiling server code written in TypeScript                               |
-| tslint.json              | Config settings for TSLint code style checking                                                |
+| .eslintrc.json           | Config settings for ESLint code style checking                                                |
 | .env.sample              | Env variables file example to be renamed to .env                                              |
 
 ## Configuring TypeScript compilation
@@ -188,11 +177,11 @@ There is also a `files` option which takes an array of individual file names whi
 | `clean`                   | Does the same as 'npm run clean:build'.    |
 | `start`                   | Runs node on `dist/index.js` which is the apps entry point                                |
 | `dev`                     | Nodemon, process restarts if crashes. Continuously watches `.ts` files and re-compiles to `.js`   |
-| `lint`                    | Runs TSLint on project files                                                                      |
+| `lint`                    | Runs ESLint on project files                                                                      |
 | `test`                    | Runs all tests in the project    |
 | `covarage`                | Runs all tests and coverage in the project |
 | `clean:build`             | Removes all `.js` files in the `dist` folder |
-| `ci`                      | Runs TSLint and all test in the project | 
+| `ci`                      | Runs ESLint and all test in the project | 
 
 # Docker
 [Docker](https://www.docker.com/) is an open platform for application development, delivery and operation. Docker was developed for faster uploading your apps. 
@@ -214,24 +203,6 @@ docker run -d [-p {your_port}:3000] [-e key=value] [-v {your_app_directory}:/opt
 | `-p {your_port}:3000`              | Port mounting. Default: **`3000`**     |
 | `-e key=value`                     | Environment variables |
 | `{script}`                         | Run script in container. Default: **`start`** |
-
-# TSLint
-TSLint is a code linter which mainly helps catch minor code quality and style issues.
-TSLint is very similar to ESLint or JSLint but is built with TypeScript in mind.
-
-## TSLint rules
-Like most linters, TSLint has a wide set of configurable rules as well as support for custom rule sets.
-All rules are configured through `tslint.json`.
-In this project, we are using a fairly basic set of rules with no additional custom rules.
-The settings are largely based off the TSLint settings that we use to develop TypeScript itself.
-
-## Running TSLint
-Like the rest of our build steps, we use npm scripts to invoke TSLint.
-To run TSLint you can call the main build script or just the TSLint task.
-```
-npm run build   // runs full build including TSLint
-npm run tslint  // runs only TSLint
-```
 
 # Running TEST
 Like the rest of the steps, we use npm scripts to call test.
@@ -265,13 +236,10 @@ In that file you'll find two sections:
 | koa-router                      | Router middleware for koa.                                            |
 | koa-helmet                      | Wrapper for helmet, important security headers to make app more secure| 
 | @koa/cors                       | Cross-Origin Resource Sharing(CORS) for koa                           |
-| pg                              | PostgreSQL driver, needed for the ORM.                                |
 | reflect-metadata                | Used by typeORM to implement decorators.                              |
 | typeorm                         | A very cool SQL ORM.                                                  |
 | class-validator                 | Decorator based entities validation.                                  |
-| delay                           | Delay a promise a specified amount of time                            |
 | koa-response-time               | X-Response-Time middleware for Koa.                                   |
-| lodash                          | A modern JavaScript utility library delivering modularity, performance & extras.|
 | node-input-validator            | Validation library for node.js                                        |
 | uuid                            | Simple, fast generation of RFC4122 UUIDS.                              |
 
@@ -282,7 +250,6 @@ In that file you'll find two sections:
 | @types                          | Dependencies in this folder are `.d.ts` files used to provide types   |
 | nodemon                         | Utility that automatically restarts node process when it crashes      |
 | ts-node                         | Enables directly running TS files. Used to run `copy-static-assets.ts`|
-| tslint                          | Linter (similar to ESLint) for TypeScript files                       |
 | typescript                      | JavaScript compiler/type checker that boosts JavaScript productivity  |
 | jest                            | Jest is a zero configuration test runner that allows you easily write JavaScript tests without setting anything up.|
 | supertest                       | Library for testing HTTP servers on node js|
