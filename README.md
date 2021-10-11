@@ -92,8 +92,8 @@ Create a .env file (or just rename the .env.sample) containing all the env varia
 
  * PORT -> port where the server will be started on. Default: **`3000`**.
  * NODE_ENV -> environment, development value will set the logger as debug level. Possible options: development, test, production. Default: **development**.
- * DATABASE_USER -> Database user. Default: **`mysql`**.
- * DATABASE_PASS -> Database password. Default: **`mysql`**.
+ * DATABASE_USER -> Database user. Default: **`root`**.
+ * DATABASE_PASS -> Database password. Default: **`root`**.
  * DATABASE_HOST -> Database host. Default: **`localhost`**.
  * DATABASE_PORT -> Database port. Default: **`3306`**.
  * DATABASE_NAME -> Database name. Default: **`default`**.
