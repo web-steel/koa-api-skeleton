@@ -4,16 +4,18 @@
     </a>     
     <h1>Koa API Skeleton</h1>
     <p>The main purpose of this repository is to build a good project setup and workflow for writing a node REST API in TypeScript using Koa2 and TypeORM.</p>
+    <a href="https://codecov.io/gh/web-steel/koa.api.skeleton">
+        <img src="https://codecov.io/gh/web-steel/koa.api.skeleton/branch/master/graph/badge.svg?token=n2Me39fSAc"/>
+    </a>
     <a href="https://www.typescriptlang.org/">
-        <img alt="TypeScript LOVE" src="https://img.shields.io/npm/types/typescript?style=flat-square">
+        <img alt="TypeScript LOVE" src="https://img.shields.io/npm/types/typescript">
     </a>
     <a href="https://raw.githubusercontent.com/web-steel/koa.api.skeleton/master/LICENSE">
-        <img alt="MIT Licence" src="https://img.shields.io/github/license/web-steel/koa.api.skeleton?style=flat-square">
+        <img alt="MIT Licence" src="https://img.shields.io/github/license/web-steel/koa.api.skeleton">
     </a>
     <a href="https://github.com/ellerbrock/open-source-badge/">
-        <img alt="Open Source Love" src="https://img.shields.io/badge/Open%20Source-YES-brightgreen?style=flat-square" />
+        <img alt="Open Source Love" src="https://img.shields.io/badge/Open%20Source-YES-brightgreen" />
     </a>
-
 </div>
 <br/>
 
