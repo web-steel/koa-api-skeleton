@@ -1,10 +1,23 @@
 <div align="center">
-  <h1>Koa API Skeleton</h1>
+    <a href="https://github.com/web-steel/koa.api.skeleton" title="Koa API Skeleton">
+        <img alt="Koa API Skeleton" src="https://miro.medium.com/max/1140/1*KV5Uyy1RYBh4TKvivBUAgQ.jpeg" height="150px" />
+    </a>     
+    <h1>Koa API Skeleton</h1>
+    <p>The main purpose of this repository is to build a good project setup and workflow for writing a node REST API in TypeScript using Koa2 and TypeORM.</p>
+    <a href="https://www.typescriptlang.org/">
+        <img alt="TypeScript LOVE" src="https://img.shields.io/npm/types/typescript?style=flat-square">
+    </a>
+    <a href="https://raw.githubusercontent.com/web-steel/koa.api.skeleton/master/LICENSE">
+        <img alt="MIT Licence" src="https://img.shields.io/github/license/web-steel/koa.api.skeleton?style=flat-square">
+    </a>
+    <a href="https://github.com/ellerbrock/open-source-badge/">
+        <img alt="Open Source Love" src="https://img.shields.io/badge/Open%20Source-YES-brightgreen?style=flat-square" />
+    </a>
+
 </div>
+<br/>
 
-The main purpose of this repository is to build a good project setup and workflow for writing a node REST API in TypeScript using Koa2 and TypeORM.
-
-AVAILABLE ENDPOINTS
+#### AVAILABLE ENDPOINTS
 
 | method             | resource         | description                                                                                    |
 |:-------------------|:-----------------|:-----------------------------------------------------------------------------------------------|
@@ -161,7 +174,7 @@ The rest of the file define the TypeScript project context.
 The project context is basically a set of options that determine which files are compiled when the compiler is invoked with a specific `tsconfig.json`.
 In this case, we use the following to define our project context: 
 ```json
-    "include" : [
+    "include": [
         "src/**/*"
     ]
 ```
