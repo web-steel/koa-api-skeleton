@@ -8,6 +8,7 @@ export default async (app: Koa) => {
   app.on("error", (err: Error, ctx: Koa.DefaultContext) => {
     Sentry.withScope(function (scope) {
       scope.addEventProcessor(function (event) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         return Sentry.Handlers.parseRequest(event, ctx.request);
       });
       Sentry.captureException(err);

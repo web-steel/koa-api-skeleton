@@ -27,5 +27,6 @@ export default () => async (ctx: DefaultContext, next: () => Promise<any>) => {
     });
 
     if (envConfig.nodeEnv !== 'production')
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         winston.log(getLogLevelForStatus(ctx.status, 'winston'), msg);
 };

@@ -19,6 +19,7 @@ import Koa from 'koa';
 const app: Koa = new Koa();
 
 // Validation middleware -> adds ctx.validate
+// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 app.use(validator.koa());
 app.use(overrideValidator());
 
@@ -52,6 +53,7 @@ app.use(bodyParser({
 app.use(requestId());
 
 // Adds an X-Response-Time header with a query execution time value
+// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 app.use(responseTime());
 
 // Console debug logging
@@ -61,6 +63,7 @@ app.use(logging());
 app.use(responseHandler());
 app.use(errorHandler());
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 app.use(swaggerUi.serve);
 
 app.use(compress());

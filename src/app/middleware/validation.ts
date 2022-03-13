@@ -22,7 +22,9 @@ export default () => async (ctx: Context, next: () => Promise<any>) => {
             const error = getError(v.errors);
 
             throw (isRequired(v.errors) ?
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
                 new BadRequest(error) :
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
                 new UnprocessableEntity(error));
         }
 

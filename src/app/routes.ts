@@ -9,6 +9,7 @@ export default async (app: Koa) => {
     const router = new Router();
 
     router.get('/health', HealthController.ok);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     router.get('/swagger', swaggerUi.setup(swaggerSpec));
 
     app.use(router.routes());
