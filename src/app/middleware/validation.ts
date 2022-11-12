@@ -1,11 +1,15 @@
-import { BadRequest, UnprocessableEntity } from '../../constant/errors';
+import { BadRequest, UnprocessableEntity } from '../../constant/errors'
 import { Context } from 'koa';
 
 export default () => async (ctx: Context, next: () => Promise<any>) => {
-    const valid = ctx.validate;
+    const valid = ctx.validate.bind(ctx);
 
-    ctx.validate = async function (inputs: any, rules: any, message: string) {
-        const props: any = {};
+    ctx.validate = async function(
+        inputs: { [key: string]: string | number | boolean },
+        rules: { [key: string]: string[] },
+        message: { [key: string]: string }
+    ) {
+        const props: { [key: string]: string | string[] } = {};
         for (const prop in rules) {
             if (rules.hasOwnProperty(prop)) {
                 if (Array.isArray(rules[prop])) {
@@ -14,14 +18,13 @@ export default () => async (ctx: Context, next: () => Promise<any>) => {
                     props[prop] = rules[prop];
             }
         }
-        const v = await valid(inputs, props, message);
-        const isValid = await v.check();
 
-        if (!isValid) {
+        try {
+            await valid(inputs, props, message);
+        } catch ({ body }) {
+            const error = getError(body.errors);
 
-            const error = getError(v.errors);
-
-            throw (isRequired(v.errors) ?
+            throw (isRequired(body.errors) ?
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
                 new BadRequest(error) :
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-argument

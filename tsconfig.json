@@ -8,12 +8,14 @@
     "noImplicitAny": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "typeRoots": ["./node_modules/@types"],
   },
   "includes": [
     "src/**/*"
   ],
   "exclude": [
+    "src/test",
     "node_modules",
     "dist"
   ]

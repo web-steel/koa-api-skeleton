@@ -1,8 +1,8 @@
 {
   "name": "koa-api-skeleton",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "REST API skeleton using NodeJS and Koa2, Typescript. TypeORM with class-validator, SQL CRUD. Docker.",
-  "main": "dist/index.js",
+  "main": "index.js",
   "readmeFilename": "README.md",
   "scripts": {
     "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx src",

@@ -15,7 +15,7 @@ const modules = [
 
 async function ignite() {
     for (const filename of modules) {
-        const module = await import('./' + filename + '.ts');
+        const module = await import('./' + filename);
         await module.default(app);
     }
 }
